@@ -52,11 +52,11 @@ const ChatAssistant: React.FC = () => {
 
   return (
     <div className="flex flex-col h-[600px] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="bg-gray-800 p-4 text-white flex justify-between items-center">
+      <div className="bg-[#1A1A1A] p-4 text-white flex justify-between items-center border-b border-[#F27D26]">
         <h3 className="font-semibold flex items-center gap-2">
-          <span>🤖</span> AI Traffic Guide
+          <span className="text-[#F27D26]">🤖</span> AI Traffic Guide
         </h3>
-        <span className="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">Powered by Gemini</span>
+        <span className="text-[10px] uppercase font-bold tracking-widest bg-slate-800 px-2 py-1 rounded text-slate-400">Powered by Gemini</span>
       </div>
       
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
@@ -68,7 +68,7 @@ const ChatAssistant: React.FC = () => {
             <div
               className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm whitespace-pre-wrap ${
                 msg.role === 'user'
-                  ? 'bg-blue-600 text-white rounded-tr-none'
+                  ? 'bg-[#F27D26] text-white rounded-tr-none shadow-md'
                   : 'bg-white border border-gray-200 text-gray-800 rounded-tl-none shadow-sm'
               }`}
             >
@@ -98,13 +98,13 @@ const ChatAssistant: React.FC = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Ask about Part 4 Mobile Works, MRWA codes..."
-            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#F27D26] focus:border-transparent text-sm"
             disabled={loading}
           />
           <button
             onClick={handleSend}
             disabled={loading}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="bg-[#F27D26] text-white px-4 py-2 rounded-lg hover:bg-[#d96a1d] disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
