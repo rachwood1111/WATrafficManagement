@@ -62,7 +62,10 @@ const SpeedCalculator: React.FC = () => {
                  <p className="text-lg font-bold text-blue-600">
                    {data.signSpacing.min}m - {data.signSpacing.max}m
                  </p>
-                 <p className="text-xs text-slate-400 mt-1">(-10% to +25%)</p>
+                 <p className="text-xs text-slate-400 mt-1">(-10% to +25% or +15m)</p>
+                 {data.signSpacingNote && (
+                   <p className="text-xs text-blue-600 font-medium mt-1">{data.signSpacingNote}</p>
+                 )}
                </div>
              </div>
           </div>

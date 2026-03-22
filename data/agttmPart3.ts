@@ -1,10 +1,11 @@
 import { TrafficRequirements, ValueWithTolerance } from '../types';
 
-// Helper to calculate -10% and +25% tolerance
-// "Code of Practice (10% less and 25% more)"
+// Helper to calculate -10% and +25% or +15m tolerance
+// "Code of Practice (10% less and 25% or 15m more)"
 const calcTolerance = (val: number): ValueWithTolerance => {
   const min = Math.round(val * 0.9 * 10) / 10; // -10% (1dp)
-  const max = Math.round(val * 1.25 * 10) / 10; // +25% (1dp)
+  const maxTolerance = Math.max(val * 0.25, 15);
+  const max = Math.round((val + maxTolerance) * 10) / 10; // +25% or +15m (1dp)
   return {
     value: val,
     min,

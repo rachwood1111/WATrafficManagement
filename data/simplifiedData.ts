@@ -1,12 +1,13 @@
 
 import { SimplifiedGuideData, ToleranceValue, UhfChannelGroup } from '../types';
 
-// Calculate -10% and +25% tolerance (rounded to nearest meter)
+// Calculate -10% and +25% or +15m tolerance (whichever is greater, rounded to 1 decimal place)
 const calculateTolerance = (base: number): ToleranceValue => {
+  const maxTolerance = Math.max(base * 0.25, 15);
   return {
     base,
-    min: Math.round(base * 0.9),
-    max: Math.round(base * 1.25)
+    min: Math.round(base * 0.9 * 10) / 10,
+    max: Math.round((base + maxTolerance) * 10) / 10
   };
 };
 
@@ -16,6 +17,7 @@ export const getSimplifiedData = (speed: number): SimplifiedGuideData => {
   let taperLateral = 0;
   let laneWidth = 3.5;
   let laneWidthNote = "";
+  let signSpacingNote = "";
 
   // 1. SIGN SPACING (AGTTM Part 3 Table 2.2)
   // < 55: 15m
@@ -27,6 +29,12 @@ export const getSimplifiedData = (speed: number): SimplifiedGuideData => {
     signSpacingBase = 45;
   } else { // Covers 70, 80, 90, 100, 110 (Band > 65)
     signSpacingBase = speed;
+  }
+
+  // MRWA CoP Departure for sign spacing tolerance (+15m rule)
+  // Only a departure if 15m is greater than 25% of base (i.e. base < 60m)
+  if (signSpacingBase < 60) {
+    signSpacingNote = "(MRWA CoP Departure)";
   }
 
   // 2. TAPER LENGTHS (AGTTM Part 3 Table 5.7)
@@ -73,11 +81,11 @@ export const getSimplifiedData = (speed: number): SimplifiedGuideData => {
 
   // 3. LANE WIDTHS (MRWA Code of Practice)
   // <= 60: 3.0m
-  // 61-70: 3.2m
-  // > 70: 3.5m
+  // 61-80: 3.2m
+  // > 80: 3.5m
   if (speed <= 60) {
     laneWidth = 3.0;
-  } else if (speed === 70) {
+  } else if (speed <= 80) {
     laneWidth = 3.2;
     laneWidthNote = "(MRWA CoP Departure)";
   } else {
@@ -90,7 +98,8 @@ export const getSimplifiedData = (speed: number): SimplifiedGuideData => {
     taperMerge,
     taperLateral,
     laneWidth,
-    laneWidthNote
+    laneWidthNote,
+    signSpacingNote
   };
 };
 

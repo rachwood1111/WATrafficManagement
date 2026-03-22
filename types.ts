@@ -12,6 +12,7 @@ export interface SimplifiedGuideData {
   taperLateral: number;
   laneWidth: number;
   laneWidthNote?: string;
+  signSpacingNote?: string;
 }
 
 export interface UhfChannelGroup {

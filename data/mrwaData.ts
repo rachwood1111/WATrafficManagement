@@ -1,9 +1,10 @@
 import { MrwaSpecifics, ValueWithTolerance } from '../types';
 
-// Helper to calculate -10% and +25% tolerance
+// Helper to calculate -10% and +25% or +15m tolerance
 const calcTolerance = (val: number): ValueWithTolerance => {
   const min = Math.round(val * 0.9); // -10%
-  const max = Math.round(val * 1.25); // +25%
+  const maxTolerance = Math.max(val * 0.25, 15);
+  const max = Math.round(val + maxTolerance); // +25% or +15m
   return {
     value: val,
     min,
