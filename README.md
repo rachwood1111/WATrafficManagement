@@ -1,6 +1,6 @@
 # Traffic Management Guide (AGTTM & MRWA)
 
-A utility for traffic management personnel to calculate site setup requirements based on road speed, referencing AGTTM Part 3 and MRWA Code of Practice (Lane Widths).
+A utility for traffic management personnel to calculate site setup requirements based on road speed, referencing AGTTM Part 3 and MRWA Code of Practice.
 
 ## 🚀 How to share this with your team
 
@@ -21,7 +21,7 @@ Once deployed, Vercel/Netlify will give you a website link (e.g., `traffic-guide
 ---
 
 ## Features
-*   **Sign Spacing (AGTTM Part 3)**: Calculates spacing based on speed with tolerances.
+*   **Sign Spacing (AGTTM Part 3)**: Calculates spacing based on speed with tolerances and WA departures.
 *   **Taper Lengths (AGTTM Part 3)**: Merge and Lateral Shift tapers based on Table 5.7 and user inputs.
-*   **Lane Widths (MRWA CoP)**: Includes specific **MRWA departures** (3.2m for 61-70km/h).
+*   **Lane Widths (MRWA CoP)**: Includes specific **MRWA departures** (3.2m for 61-80km/h).
 *   **UHF Channels**: Guide for Available vs Restricted channels.
