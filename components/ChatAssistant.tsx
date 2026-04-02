@@ -51,7 +51,7 @@ const ChatAssistant: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[600px] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div className="flex flex-col h-[500px] md:h-[600px] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
       <div className="bg-[#1A1A1A] p-4 text-white flex justify-between items-center border-b border-[#F27D26]">
         <h3 className="font-semibold flex items-center gap-2">
           <span className="text-[#F27D26]">🤖</span> AI Traffic Guide

@@ -1,5 +1,5 @@
 // Basic Service Worker for PWA support
-const CACHE_NAME = 'ttm-wa-v1';
+const CACHE_NAME = 'ttm-wa-v2';
 const ASSETS = [
   '/',
   '/index.html',

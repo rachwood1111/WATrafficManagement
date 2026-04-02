@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import SpeedCalculator from './components/SpeedCalculator';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
+import ChatAssistant from './components/ChatAssistant';
 
 const App: React.FC = () => {
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
+    console.log('App mounted, checking standalone mode...');
     const checkStandalone = () => {
       const standalone = window.matchMedia('(display-mode: standalone)').matches 
         || (window.navigator as any).standalone 
         || document.referrer.includes('android-app://');
+      console.log('Standalone mode:', standalone);
       setIsStandalone(standalone);
     };
     checkStandalone();
@@ -83,12 +86,16 @@ const App: React.FC = () => {
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-8">
             <SpeedCalculator />
+            <div className="lg:hidden">
+              <ChatAssistant />
+            </div>
           </div>
 
           {/* Sidebar / Quick Links (Visual Filler) */}
           <div className="hidden lg:block space-y-6">
+            <ChatAssistant />
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
               <h3 className="font-semibold text-gray-800 mb-4">Loaded Standards</h3>
               <ul className="space-y-3 text-sm text-gray-600">

@@ -18,6 +18,7 @@ const PWAInstallPrompt: React.FC = () => {
       || (window.navigator as any).standalone 
       || document.referrer.includes('android-app://');
 
+    console.log('PWA Prompt: isStandalone =', isStandalone);
     if (isStandalone) return;
 
     // 2. Detect platform

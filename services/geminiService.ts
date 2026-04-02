@@ -14,7 +14,7 @@ export const askTrafficAssistant = async (question: string): Promise<string> => 
   }
 
   try {
-    const modelId = 'gemini-2.5-flash'; // Use flash for speed and search capabilities
+    const modelId = 'gemini-3-flash-preview'; // Use flash for speed and search capabilities
     
     const response = await ai.models.generateContent({
       model: modelId,
