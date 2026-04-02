@@ -45,7 +45,13 @@ const App: React.FC = () => {
           {!isStandalone && (
             <button 
               onClick={() => {
-                window.dispatchEvent(new CustomEvent('trigger-pwa-install'));
+                if ((window as any).showPwaInstallPrompt) {
+                  (window as any).showPwaInstallPrompt();
+                } else {
+                  console.error('PWA install prompt function not found');
+                  // Fallback: reload might help if it's a race condition
+                  window.location.reload();
+                }
               }}
               className="flex items-center gap-2 bg-[#F27D26]/10 text-[#F27D26] px-3 py-2 sm:px-4 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#F27D26]/20 transition-colors"
             >
