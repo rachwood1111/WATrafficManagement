@@ -1,9 +1,11 @@
 import React from 'react';
 import SpeedCalculator from './components/SpeedCalculator';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 
 const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PWAInstallPrompt />
       {/* Header */}
       <header className="bg-[#1A1A1A] text-white shadow-lg border-b-4 border-[#F27D26]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
