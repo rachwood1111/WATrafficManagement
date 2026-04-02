@@ -7,24 +7,27 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <PWAInstallPrompt />
       {/* Header */}
-      <header className="bg-[#1A1A1A] text-white shadow-lg border-b-4 border-[#F27D26]">
+      <header className="bg-white text-[#1A1A1A] shadow-md border-b-2 border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex-shrink-0">
-              <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="flex-shrink-0 bg-gray-50 p-2 rounded-xl border border-gray-100 shadow-sm">
+              <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* Base */}
-                <path d="M2 20H22V23H2V20Z" fill="#000000" />
+                <path d="M2 20H22V23H2V20Z" fill="#1A1A1A" />
                 {/* Orange Body */}
                 <path d="M5 20L12 2L19 20H5Z" fill="#F27D26" />
-                {/* Reflective Strip */}
-                <path d="M8.5 10.5L15.5 10.5L16.5 13.5H7.5L8.5 10.5Z" fill="#FFFFFF" fillOpacity="0.9" />
+                {/* Reflective Strip 1 */}
+                <path d="M8.5 10.5L15.5 10.5L16.5 13.5H7.5L8.5 10.5Z" fill="#FFFFFF" fillOpacity="0.95" />
+                {/* Reflective Strip 2 (closer to top) */}
+                <path d="M10.2 6L13.8 6L14.5 8H9.5L10.2 6Z" fill="#FFFFFF" fillOpacity="0.95" />
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl font-black tracking-tight uppercase">
-                <span className="text-white">TTM WA</span>
-                <span className="ml-2 text-[#F27D26]">Cheat Sheet</span>
+              <h1 className="text-2xl font-black tracking-tight uppercase leading-none">
+                <span className="text-[#F27D26]">TTM</span>
+                <span className="ml-2 text-[#1A1A1A]">WA Cheat Sheet</span>
               </h1>
+              <p className="text-[10px] font-bold text-gray-400 tracking-[0.2em] uppercase mt-1">Western Australia Standards</p>
             </div>
           </div>
         </div>

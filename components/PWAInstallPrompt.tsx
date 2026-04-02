@@ -66,23 +66,29 @@ const PWAInstallPrompt: React.FC = () => {
         exit={{ y: 100, opacity: 0 }}
         className="fixed bottom-6 left-4 right-4 z-50 md:left-auto md:right-6 md:w-80"
       >
-        <div className="bg-[#1A1A1A] text-white p-5 rounded-2xl shadow-2xl border border-[#F27D26]/30">
+        <div className="bg-white text-[#1A1A1A] p-5 rounded-2xl shadow-2xl border border-gray-100">
           <div className="flex justify-between items-start mb-3">
             <div className="flex items-center gap-3">
-              <div className="bg-[#F27D26] p-2 rounded-lg">
-                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 20H22V23H2V20Z" fill="#000000" />
-                  <path d="M5 20L12 2L19 20H5Z" fill="currentColor" />
+              <div className="bg-gray-50 p-2 rounded-xl border border-gray-100 shadow-sm">
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Base */}
+                  <path d="M2 20H22V23H2V20Z" fill="#1A1A1A" />
+                  {/* Orange Body */}
+                  <path d="M5 20L12 2L19 20H5Z" fill="#F27D26" />
+                  {/* Reflective Strip 1 */}
+                  <path d="M8.5 10.5L15.5 10.5L16.5 13.5H7.5L8.5 10.5Z" fill="#FFFFFF" fillOpacity="0.95" />
+                  {/* Reflective Strip 2 */}
+                  <path d="M10.2 6L13.8 6L14.5 8H9.5L10.2 6Z" fill="#FFFFFF" fillOpacity="0.95" />
                 </svg>
               </div>
               <h4 className="font-bold text-sm">Install TTM WA Guide</h4>
             </div>
-            <button onClick={dismissPrompt} className="text-slate-400 hover:text-white">
+            <button onClick={dismissPrompt} className="text-gray-400 hover:text-gray-600">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
 
-          <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+          <p className="text-xs text-gray-500 mb-4 leading-relaxed">
             {platform === 'ios' 
               ? 'To install: Tap the "Share" icon below and then select "Add to Home Screen".'
               : 'Install this app on your home screen for quick offline access to TTM data.'}
