@@ -24,17 +24,28 @@ const PWAInstallPrompt: React.FC = () => {
 
     // 3. Listen for Chrome's install prompt
     const handleBeforeInstallPrompt = (e: any) => {
+      console.log('beforeinstallprompt event fired');
       e.preventDefault();
       setDeferredPrompt(e);
-      setShowPrompt(true);
+      
+      const dismissedAt = localStorage.getItem('pwa_prompt_dismissed_at');
+      const oneDay = 24 * 60 * 60 * 1000;
+      if (!dismissedAt || (Date.now() - parseInt(dismissedAt)) > oneDay) {
+        setShowPrompt(true);
+      }
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
-    // 4. For iOS, show prompt after a short delay (if not already dismissed)
-    const hasDismissed = localStorage.getItem('pwa_prompt_dismissed');
-    if (platform === 'ios' && !hasDismissed) {
-      const timer = setTimeout(() => setShowPrompt(true), 3000);
+    // 4. For iOS, show prompt after a short delay
+    if (platform === 'ios') {
+      const timer = setTimeout(() => {
+        const dismissedAt = localStorage.getItem('pwa_prompt_dismissed_at');
+        const oneDay = 24 * 60 * 60 * 1000;
+        if (!dismissedAt || (Date.now() - parseInt(dismissedAt)) > oneDay) {
+          setShowPrompt(true);
+        }
+      }, 3000);
       return () => clearTimeout(timer);
     }
 
@@ -53,7 +64,7 @@ const PWAInstallPrompt: React.FC = () => {
 
   const dismissPrompt = () => {
     setShowPrompt(false);
-    localStorage.setItem('pwa_prompt_dismissed', 'true');
+    localStorage.setItem('pwa_prompt_dismissed_at', Date.now().toString());
   };
 
   if (!showPrompt) return null;

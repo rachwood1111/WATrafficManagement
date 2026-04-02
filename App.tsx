@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SpeedCalculator from './components/SpeedCalculator';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 
 const App: React.FC = () => {
+  const [isStandalone, setIsStandalone] = useState(false);
+
+  useEffect(() => {
+    const checkStandalone = () => {
+      const standalone = window.matchMedia('(display-mode: standalone)').matches 
+        || (window.navigator as any).standalone 
+        || document.referrer.includes('android-app://');
+      setIsStandalone(standalone);
+    };
+    checkStandalone();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <PWAInstallPrompt />
@@ -29,6 +41,22 @@ const App: React.FC = () => {
               </h1>
             </div>
           </div>
+
+          {!isStandalone && (
+            <button 
+              onClick={() => {
+                // Trigger the prompt by clearing the dismissal timestamp
+                localStorage.removeItem('pwa_prompt_dismissed_at');
+                window.location.reload(); // Reload to trigger the event again
+              }}
+              className="hidden sm:flex items-center gap-2 bg-[#F27D26]/10 text-[#F27D26] px-4 py-2 rounded-xl text-sm font-bold hover:bg-[#F27D26]/20 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Install App
+            </button>
+          )}
         </div>
       </header>
 
