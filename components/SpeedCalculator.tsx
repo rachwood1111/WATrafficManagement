@@ -18,28 +18,37 @@ const SpeedCalculator: React.FC = () => {
     <div className="space-y-8">
       
       {/* 1. Speed Selector */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-        <h2 className="text-lg font-bold text-[#1A1A1A] mb-4 flex items-center gap-2">
-          <span className="bg-orange-50 text-[#F27D26] p-1.5 rounded-lg">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+      <div className="bg-white rounded-2xl shadow-xl border-2 border-[#F27D26]/20 p-6 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-[#F27D26]"></div>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-black text-[#1A1A1A] flex items-center gap-3">
+            <span className="bg-[#F27D26] text-white p-2 rounded-xl shadow-lg shadow-orange-500/20">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </span>
+            Step 1: Select Posted Speed
+          </h2>
+          <span className="hidden sm:block text-[10px] font-black uppercase tracking-widest text-[#F27D26] bg-orange-50 px-3 py-1 rounded-full border border-orange-100 animate-pulse">
+            Required Selection
           </span>
-          Select Posted Speed Limit
-        </h2>
-        <div className="flex flex-wrap gap-2">
+        </div>
+        <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
           {speeds.map((s) => (
             <button
               key={s}
               onClick={() => setSpeed(s)}
-              className={`flex-1 min-w-[70px] py-3 rounded-xl font-bold text-lg transition-all duration-200 ${
+              className={`py-4 rounded-2xl font-black text-xl transition-all duration-300 border-2 ${
                 speed === s
-                  ? 'bg-[#F27D26] text-white shadow-lg shadow-orange-500/30 scale-105'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  ? 'bg-[#F27D26] text-white border-[#F27D26] shadow-xl shadow-orange-500/40 scale-110 z-10'
+                  : 'bg-slate-50 text-slate-400 border-slate-100 hover:border-slate-300 hover:text-slate-600 hover:bg-white'
               }`}
             >
               {s}
             </button>
           ))}
         </div>
+        <p className="mt-4 text-xs font-bold text-slate-400 uppercase tracking-tight text-center sm:text-left">
+          Tap a speed limit to update all calculations below
+        </p>
       </div>
 
       {/* 2. Key Data Cards */}

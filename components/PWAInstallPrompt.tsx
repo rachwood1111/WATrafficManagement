@@ -73,12 +73,12 @@ const PWAInstallPrompt: React.FC = () => {
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {/* Base */}
                   <path d="M2 20H22V23H2V20Z" fill="#1A1A1A" />
-                  {/* Orange Body */}
-                  <path d="M5 20L12 2L19 20H5Z" fill="#F27D26" />
+                  {/* Orange Body - Less Pointy */}
+                  <path d="M5 20L10 4.5H14L19 20H5Z" fill="#F27D26" />
                   {/* Reflective Strip 1 */}
-                  <path d="M8.5 10.5L15.5 10.5L16.5 13.5H7.5L8.5 10.5Z" fill="#FFFFFF" fillOpacity="0.95" />
+                  <path d="M8.2 11.5H15.8L16.8 14.5H7.2L8.2 11.5Z" fill="#FFFFFF" fillOpacity="0.95" />
                   {/* Reflective Strip 2 */}
-                  <path d="M10.2 6L13.8 6L14.5 8H9.5L10.2 6Z" fill="#FFFFFF" fillOpacity="0.95" />
+                  <path d="M10.4 6H13.6L14.2 8.5H9.8L10.4 6Z" fill="#FFFFFF" fillOpacity="0.95" />
                 </svg>
               </div>
               <h4 className="font-bold text-sm">Install TTM WA Guide</h4>
