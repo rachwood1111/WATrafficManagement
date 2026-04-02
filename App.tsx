@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SpeedCalculator from './components/SpeedCalculator';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
-import ChatAssistant from './components/ChatAssistant';
 
 const App: React.FC = () => {
   const [isStandalone, setIsStandalone] = useState(false);
@@ -88,14 +87,10 @@ const App: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             <SpeedCalculator />
-            <div className="lg:hidden">
-              <ChatAssistant />
-            </div>
           </div>
 
           {/* Sidebar / Quick Links (Visual Filler) */}
           <div className="hidden lg:block space-y-6">
-            <ChatAssistant />
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
               <h3 className="font-semibold text-gray-800 mb-4">Loaded Standards</h3>
               <ul className="space-y-3 text-sm text-gray-600">

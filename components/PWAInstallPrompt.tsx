@@ -1,16 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const PWAInstallPrompt: React.FC = () => {
   const [showPrompt, setShowPrompt] = useState(false);
   const [platform, setPlatform] = useState<'ios' | 'android' | 'other'>('other');
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
+  const handleInstall = useCallback(async () => {
+    if (!deferredPrompt) {
+      console.log('No deferredPrompt available for native install');
+      return;
+    }
+    console.log('Triggering native install prompt');
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log('User choice outcome:', outcome);
+    if (outcome === 'accepted') {
+      setShowPrompt(false);
+    }
+    setDeferredPrompt(null);
+  }, [deferredPrompt]);
+
   useEffect(() => {
     // Define a global function to trigger the prompt manually
     (window as any).showPwaInstallPrompt = () => {
       console.log('Manual PWA prompt trigger called');
-      localStorage.removeItem('pwa_prompt_dismissed_at');
-      setShowPrompt(true);
+      // If we have a deferred prompt, try to use it directly
+      if ((window as any).deferredPwaPrompt) {
+        setDeferredPrompt((window as any).deferredPwaPrompt);
+        setShowPrompt(true);
+      } else {
+        localStorage.removeItem('pwa_prompt_dismissed_at');
+        setShowPrompt(true);
+      }
     };
 
     // 1. Check if already installed
@@ -34,6 +55,7 @@ const PWAInstallPrompt: React.FC = () => {
       console.log('beforeinstallprompt event fired');
       e.preventDefault();
       setDeferredPrompt(e);
+      (window as any).deferredPwaPrompt = e; // Store globally for App.tsx access if needed
       
       const dismissedAt = localStorage.getItem('pwa_prompt_dismissed_at');
       const oneDay = 24 * 60 * 60 * 1000;
@@ -41,6 +63,17 @@ const PWAInstallPrompt: React.FC = () => {
         setShowPrompt(true);
       }
     };
+
+    // Check if the event already fired (some browsers might fire it very early)
+    if ((window as any).deferredPwaPrompt) {
+      console.log('Using globally captured deferredPwaPrompt');
+      setDeferredPrompt((window as any).deferredPwaPrompt);
+      const dismissedAt = localStorage.getItem('pwa_prompt_dismissed_at');
+      const oneDay = 24 * 60 * 60 * 1000;
+      if (!dismissedAt || (Date.now() - parseInt(dismissedAt)) > oneDay) {
+        setShowPrompt(true);
+      }
+    }
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
@@ -62,16 +95,6 @@ const PWAInstallPrompt: React.FC = () => {
     };
   }, [platform]);
 
-  const handleInstall = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      setShowPrompt(false);
-    }
-    setDeferredPrompt(null);
-  };
-
   const dismissPrompt = () => {
     setShowPrompt(false);
     localStorage.setItem('pwa_prompt_dismissed_at', Date.now().toString());
@@ -86,13 +109,9 @@ const PWAInstallPrompt: React.FC = () => {
           <div className="flex items-center gap-3">
             <div className="bg-gray-50 p-2 rounded-xl border border-gray-100 shadow-sm">
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Base */}
                 <path d="M2 20H22V23H2V20Z" fill="#1A1A1A" />
-                {/* Orange Body - Less Pointy */}
                 <path d="M5 20L10 4.5H14L19 20H5Z" fill="#F27D26" />
-                {/* Reflective Strip 1 */}
                 <path d="M8.2 11.5H15.8L16.8 14.5H7.2L8.2 11.5Z" fill="#FFFFFF" fillOpacity="0.95" />
-                {/* Reflective Strip 2 */}
                 <path d="M10.4 6H13.6L14.2 8.5H9.8L10.4 6Z" fill="#FFFFFF" fillOpacity="0.95" />
               </svg>
             </div>

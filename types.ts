@@ -25,13 +25,6 @@ export interface UhfChannelGroup {
   }>;
 }
 
-export interface ChatMessage {
-  id: string;
-  role: 'user' | 'model';
-  text: string;
-  timestamp: number;
-}
-
 export interface ValueWithTolerance {
   value: number;
   min: number;

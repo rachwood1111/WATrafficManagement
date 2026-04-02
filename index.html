@@ -20,6 +20,11 @@
           navigator.serviceWorker.register('/sw.js');
         });
       }
+      // Capture PWA install prompt event early
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        window.deferredPwaPrompt = e;
+      });
     </script>
   </head>
   <body>
