@@ -45,16 +45,15 @@ const App: React.FC = () => {
           {!isStandalone && (
             <button 
               onClick={() => {
-                // Trigger the prompt by clearing the dismissal timestamp
-                localStorage.removeItem('pwa_prompt_dismissed_at');
-                window.location.reload(); // Reload to trigger the event again
+                window.dispatchEvent(new CustomEvent('trigger-pwa-install'));
               }}
-              className="hidden sm:flex items-center gap-2 bg-[#F27D26]/10 text-[#F27D26] px-4 py-2 rounded-xl text-sm font-bold hover:bg-[#F27D26]/20 transition-colors"
+              className="flex items-center gap-2 bg-[#F27D26]/10 text-[#F27D26] px-3 py-2 sm:px-4 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#F27D26]/20 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
-              Install App
+              <span className="hidden sm:inline">Install App</span>
+              <span className="sm:hidden">Install</span>
             </button>
           )}
         </div>

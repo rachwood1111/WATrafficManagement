@@ -52,6 +52,15 @@ const PWAInstallPrompt: React.FC = () => {
     return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
   }, [platform]);
 
+  useEffect(() => {
+    const handleManualTrigger = () => {
+      localStorage.removeItem('pwa_prompt_dismissed_at');
+      setShowPrompt(true);
+    };
+    window.addEventListener('trigger-pwa-install', handleManualTrigger);
+    return () => window.removeEventListener('trigger-pwa-install', handleManualTrigger);
+  }, []);
+
   const handleInstall = async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
@@ -112,6 +121,15 @@ const PWAInstallPrompt: React.FC = () => {
             >
               Install Now
             </button>
+          )}
+
+          {platform !== 'ios' && !deferredPrompt && (
+            <div className="bg-orange-50 p-3 rounded-xl border border-orange-100 mb-2">
+               <p className="text-[10px] text-orange-800 font-medium leading-tight">
+                 <span className="font-bold uppercase block mb-1">Manual Install:</span>
+                 Tap your browser's menu (three dots or arrow) and select <span className="font-bold">"Install App"</span> or <span className="font-bold">"Add to Home Screen"</span>.
+               </p>
+            </div>
           )}
 
           {platform === 'ios' && (
