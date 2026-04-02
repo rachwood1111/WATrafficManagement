@@ -81,11 +81,11 @@ export const getSimplifiedData = (speed: number): SimplifiedGuideData => {
 
   // 3. LANE WIDTHS (MRWA Code of Practice)
   // <= 60: 3.0m
-  // 61-80: 3.2m
-  // > 80: 3.5m
+  // 61-79: 3.2m
+  // >= 80: 3.5m
   if (speed <= 60) {
     laneWidth = 3.0;
-  } else if (speed <= 80) {
+  } else if (speed < 80) {
     laneWidth = 3.2;
     laneWidthNote = "(MRWA CoP Departure)";
   } else {
@@ -106,7 +106,7 @@ export const getSimplifiedData = (speed: number): SimplifiedGuideData => {
 export const getUhfGuide = (): UhfChannelGroup[] => {
   return [
     {
-      category: "Available (General Chat)",
+      category: "AVAILABLE FOR USE",
       colorClass: "bg-green-50 text-green-800 border-green-200",
       icon: "✅",
       channels: [
@@ -122,11 +122,11 @@ export const getUhfGuide = (): UhfChannelGroup[] => {
       ]
     },
     {
-      category: "Heavy Vehicle (Site Ops)",
+      category: "Heavy Vehicle",
       colorClass: "bg-blue-50 text-blue-800 border-blue-200",
       icon: "🚛",
       channels: [
-        { id: 40, desc: "Primary communication with Heavy Vehicles/Trucks on highway." }
+        { id: 40, desc: "Heavy vehicle channel - for monitoring or communicating with heavy vehicles. Must not be used as the primary worksite traffic management channel." }
       ]
     },
     {
