@@ -1,35 +1,21 @@
 {
   "name": "TTM WA Cheat Sheet",
   "short_name": "TTM WA",
-  "description": "Traffic Management Guide for WA",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#F27D26",
+  "description": "Quick reference guide for Traffic Management in Western Australia.",
   "icons": [
     {
       "src": "https://storage.googleapis.com/static.ai.studio/attachments/8f7c9e0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m/ttm_logo.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "https://storage.googleapis.com/static.ai.studio/attachments/8f7c9e0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m/ttm_logo.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     },
     {
       "src": "https://storage.googleapis.com/static.ai.studio/attachments/8f7c9e0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m/ttm_logo.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "https://storage.googleapis.com/static.ai.studio/attachments/8f7c9e0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m/ttm_logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     }
-  ]
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF8C00"
 }
